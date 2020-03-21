@@ -1,6 +1,7 @@
-package com.example.mvvmpractice1
+package com.example.mvvmpractice1.data
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 
 // ContactRepository.kt
@@ -11,6 +12,7 @@ import androidx.lifecycle.LiveData
 
 class ContactRepository(application: Application) {
 
+    private val tag = "ContactRepository"
     private val contactDatabase = ContactDatabase.getInstance(application)!!
     private val contactDao: ContactDao = contactDatabase.contactDao()
     private val contacts: LiveData<List<Contact>> = contactDao.getAll()
@@ -23,6 +25,7 @@ class ContactRepository(application: Application) {
         try {
             val thread = Thread(Runnable {
                 contactDao.insert(contact) })
+                Log.e(tag, "contactViewModel 로부터 받은 contact 객체를 contactDao 에 삽입. contact : $contact")
             thread.start()
         } catch (e: Exception) { }
     }

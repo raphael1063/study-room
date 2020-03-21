@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mvvmpractice1.data.Contact
 
 // ContactAdapter.kt
 //ContactAdapter({ contactItemClick }, { contactItemLongClick }) 형태로, 클릭했을 때의 액션과 롱클릭 했을 때의 액션을 각각 MainActivity 에서 넘겨주는 방식을 사용했다.

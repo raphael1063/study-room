@@ -1,12 +1,17 @@
-package com.example.mvvmpractice1
+package com.example.mvvmpractice1.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mvvmpractice1.ContactAdapter
+import com.example.mvvmpractice1.ContactViewModel
+import com.example.mvvmpractice1.R
+import com.example.mvvmpractice1.data.Contact
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 //    Kotlin 에서는 람다를 이용해 보다 간편하게 사용할 수 있다.
 
     private lateinit var contactViewModel: ContactViewModel
+    private val tag = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +35,20 @@ class MainActivity : AppCompatActivity() {
         // Set contactItemClick & contactItemLongClick lambda
         val adapter = ContactAdapter({ contact ->
             // put extras of contact info & start AddActivity
-            val intent = Intent(this, AddActivity::class.java)
-            intent.putExtra(AddActivity.EXTRA_CONTACT_NAME, contact.name)
-            intent.putExtra(AddActivity.EXTRA_CONTACT_NUMBER, contact.number)
-            intent.putExtra(AddActivity.EXTRA_CONTACT_ID, contact.id)
+            val intent =
+                Intent(this, AddActivity::class.java)
+            intent.putExtra(
+                AddActivity.EXTRA_CONTACT_NAME,
+                contact.name
+            )
+            intent.putExtra(
+                AddActivity.EXTRA_CONTACT_NUMBER,
+                contact.number
+            )
+            intent.putExtra(
+                AddActivity.EXTRA_CONTACT_ID,
+                contact.id
+            )
             startActivity(intent)
         }, { contact ->
             deleteDialog(contact)
@@ -51,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         main_button.setOnClickListener {
             val intent = Intent(this, AddActivity::class.java)
             startActivity(intent)
+            Log.e(tag, "ADD 버튼 클릭됨. AddActivity 로 이동")
         }
     }
 

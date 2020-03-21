@@ -1,4 +1,4 @@
-package com.example.mvvmpractice1
+package com.example.mvvmpractice1.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -9,6 +9,7 @@ import androidx.room.*
 //또, 주목할 것은 전체 연락처 리스트를 반환하는 getAll 함수를 만들 때 LiveData 를 반환해준다는 점이다. 기존의 익숙한 List<Contact> 형식에 LiveData<>를 감싸주는 방식으로 만들 수 있다.
 @Dao
 interface ContactDao {
+
 
     @Query("SELECT * FROM contact ORDER BY name ASC")
     fun getAll(): LiveData<List<Contact>>
